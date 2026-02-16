@@ -14,7 +14,7 @@
     <meta property="og:title" content="Muhaajir Official">
     <meta property="og:description" content="Portfolio fotografi & musik. Mari berkolaborasi!">
     <meta property="og:image" content="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png">
-    <meta property="og:url" content="https://hajirmuhaajir.github.io">
+    <meta property="og:url" content="https://hajirmuhaajir.github.io/main-showcase/">
     <meta property="og:type" content="website">
     
     <!-- Favicon -->
@@ -24,7 +24,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
-    <title>Muhaajir • Fotografi & Musik</title>
+    <!-- AOS Library (CSS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <title>Muhaajir • Luxury Edition</title>
     
     <style>
         /* ===== RESET & VARIABLES ===== */
@@ -36,11 +39,11 @@
         }
 
         :root {
-            --primary: #0a1a2f;
+            --primary: #0a1a2f;        /* navy */
             --primary-dark: #051020;
             --primary-light: #1e3a5f;
-            --accent: #ffd700;
-            --accent-hover: #ffed4a;
+            --accent: #ffd700;          /* gold */
+            --accent-hover: #ffe55c;
             --accent-dim: rgba(255, 215, 0, 0.1);
             --dark-bg: #0a0f18;
             --dark-surface: #151f2c;
@@ -54,7 +57,8 @@
             --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --shadow-gold: 0 10px 25px -5px rgba(255, 215, 0, 0.2);
+            --shadow-gold: 0 10px 25px -5px rgba(255, 215, 0, 0.3);
+            --header-border: var(--accent);
         }
 
         body {
@@ -134,7 +138,12 @@
             padding: 12px 0;
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
             z-index: 999;
-            border-bottom: 2px solid var(--accent);
+            border-bottom: 2px solid var(--header-border);
+            transition: border-color 0.3s ease;
+        }
+
+        header.at-top {
+            --header-border: #ff4d4d; /* red effect when at top */
         }
 
         .header-container {
@@ -215,7 +224,7 @@
             gap: 18px;
         }
 
-        .theme-toggle {
+        .theme-toggle, .game-toggle {
             background: rgba(255, 215, 0, 0.15);
             border: none;
             color: var(--accent);
@@ -231,10 +240,10 @@
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
-        .theme-toggle:hover {
+        .theme-toggle:hover, .game-toggle:hover {
             background: var(--accent);
             color: var(--primary);
-            transform: rotate(15deg) scale(1.05);
+            transform: rotate(10deg) scale(1.05);
             border-color: transparent;
         }
 
@@ -270,26 +279,9 @@
             z-index: 0;
         }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 215, 0, 0.02) 20px, rgba(255, 215, 0, 0.02) 40px);
-            animation: rotate 60s linear infinite;
-            z-index: 0;
-        }
-
         @keyframes pulseGlow {
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .hero-content {
@@ -300,7 +292,6 @@
         .hero h1 {
             font-size: clamp(2.8rem, 10vw, 4.5rem);
             margin-bottom: 16px;
-            animation: fadeInUp 0.8s;
             text-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             letter-spacing: -0.02em;
         }
@@ -309,7 +300,6 @@
             font-size: clamp(1.2rem, 4vw, 1.6rem);
             margin-bottom: 40px;
             opacity: 0.95;
-            animation: fadeInUp 1s;
             color: var(--accent);
             font-weight: 500;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -325,7 +315,6 @@
             font-weight: 700;
             font-size: 1.1rem;
             transition: var(--transition);
-            animation: fadeInUp 1.2s;
             box-shadow: var(--shadow-gold);
             border: 2px solid transparent;
         }
@@ -426,6 +415,16 @@
             color: #cbd5e0;
         }
 
+        .clickable-location {
+            cursor: pointer;
+            color: var(--accent);
+            text-decoration: underline dotted;
+            transition: var(--transition);
+        }
+        .clickable-location:hover {
+            color: var(--accent-hover);
+        }
+
         .about-images {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -490,64 +489,7 @@
             color: var(--accent);
         }
 
-        /* Testimonials / Quotes Section */
-        .testimonials {
-            background: var(--light-surface);
-            border-radius: 50px;
-            margin: 40px auto;
-            padding: 60px 40px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(255, 215, 0, 0.15);
-        }
-
-        body.dark-mode .testimonials {
-            background: var(--dark-surface);
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: var(--light-bg);
-            padding: 35px;
-            border-radius: 25px;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            box-shadow: var(--shadow-sm);
-        }
-
-        body.dark-mode .testimonial-card {
-            background: var(--dark-bg);
-            border-color: rgba(255, 215, 0, 0.1);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-gold);
-            border-color: var(--accent);
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #4a5568;
-            font-size: 1.1rem;
-        }
-
-        body.dark-mode .testimonial-card p {
-            color: #cbd5e0;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        /* Music Player Showcase */
+        /* Music Showcase */
         .music-showcase {
             background: linear-gradient(145deg, var(--primary), var(--primary-dark));
             border-radius: 40px;
@@ -628,13 +570,72 @@
             border-color: var(--accent);
         }
 
-        @media (max-width: 768px) {
-            .showcase-content {
-                grid-template-columns: 1fr;
-            }
+        /* Testimonials / Quotes */
+        .testimonials {
+            background: var(--light-surface);
+            border-radius: 50px;
+            margin: 40px auto;
+            padding: 60px 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 215, 0, 0.15);
         }
 
-        /* Social Links Section */
+        body.dark-mode .testimonials {
+            background: var(--dark-surface);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--light-bg);
+            padding: 35px;
+            border-radius: 25px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            box-shadow: var(--shadow-sm);
+        }
+
+        body.dark-mode .testimonial-card {
+            background: var(--dark-bg);
+            border-color: rgba(255, 215, 0, 0.1);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--accent);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+
+        body.dark-mode .testimonial-card p {
+            color: #cbd5e0;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        .testimonial-author a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent);
+        }
+        .testimonial-author a:hover {
+            color: var(--accent);
+        }
+
+        /* Social Links */
         .social-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -694,28 +695,86 @@
             color: var(--accent);
         }
 
-        /* Contact Section */
-        .contact-info {
-            text-align: center;
-            margin-bottom: 50px;
+        /* Contact Form & Info */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
         }
-
-        .contact-info p {
-            margin: 15px 0;
-            font-size: 1.2rem;
+        .contact-form, .contact-email-info {
+            background: var(--light-surface);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 215, 0, 0.2);
         }
-
+        body.dark-mode .contact-form,
+        body.dark-mode .contact-email-info {
+            background: var(--dark-surface);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        body.dark-mode .form-group label {
+            color: var(--accent);
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--gray-light);
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            background: var(--light-bg);
+        }
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group textarea {
+            background: var(--dark-bg);
+            border-color: var(--gray-dark);
+            color: var(--dark-text);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255,215,0,0.2);
+        }
+        .submit-btn {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-size: 1.1rem;
+            border: 2px solid transparent;
+        }
+        .submit-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--primary);
+        }
         .email-grid {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
         }
-
         .email-item {
-            background: var(--light-surface);
-            padding: 12px 25px;
+            background: var(--light-bg);
+            padding: 12px 20px;
             border-radius: 50px;
             box-shadow: var(--shadow-sm);
             border: 1px solid rgba(255, 215, 0, 0.2);
@@ -725,26 +784,23 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         body.dark-mode .email-item {
-            background: var(--dark-surface);
+            background: var(--dark-bg);
         }
-
         .email-item:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-gold);
             border-color: var(--accent);
         }
-
         .email-item i {
             color: var(--accent);
             font-size: 1.2rem;
         }
-
         .email-item span {
             font-weight: 500;
         }
 
+        /* Toast */
         .toast-message {
             position: fixed;
             bottom: 30px;
@@ -762,13 +818,124 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-
         .toast-message.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
 
-        /* ===== FOOTER ===== */
+        /* Modal Game */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: var(--light-surface);
+            max-width: 450px;
+            width: 90%;
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: var(--shadow-gold);
+            border: 3px solid var(--accent);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        body.dark-mode .modal-content {
+            background: var(--dark-surface);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        body.dark-mode .modal-close {
+            color: var(--accent);
+        }
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: var(--accent);
+        }
+        .game-area {
+            text-align: center;
+        }
+        .game-area h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        body.dark-mode .game-area h3 {
+            color: var(--accent);
+        }
+        .game-area input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 2px solid var(--accent);
+            border-radius: 60px;
+            margin-bottom: 20px;
+            background: var(--light-bg);
+        }
+        body.dark-mode .game-area input {
+            background: var(--dark-bg);
+            color: white;
+        }
+        .game-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .game-area button {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 14px 25px;
+            border-radius: 60px;
+            font-weight: 700;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            flex: 1;
+        }
+        .game-area button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
+        }
+        .game-feedback {
+            margin: 20px 0;
+            font-weight: 600;
+            min-height: 2em;
+        }
+        .attempts {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        /* Footer */
         footer {
             background: var(--primary);
             color: white;
@@ -777,21 +944,18 @@
             margin-top: 100px;
             border-top: 4px solid var(--accent);
         }
-
         .footer-logo {
             width: 90px;
             height: 90px;
             margin-bottom: 25px;
             filter: drop-shadow(0 5px 10px rgba(255, 215, 0, 0.3));
         }
-
         .footer-social {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin: 30px 0;
         }
-
         .footer-social a {
             color: white;
             font-size: 1.6rem;
@@ -805,14 +969,12 @@
             justify-content: center;
             border: 1px solid rgba(255, 215, 0, 0.3);
         }
-
         .footer-social a:hover {
             background: var(--accent);
             color: var(--primary);
             transform: translateY(-5px) scale(1.1);
             border-color: transparent;
         }
-
         .footer-links {
             display: flex;
             justify-content: center;
@@ -820,7 +982,6 @@
             margin: 30px 0;
             flex-wrap: wrap;
         }
-
         .footer-links a {
             color: white;
             text-decoration: none;
@@ -828,12 +989,10 @@
             transition: var(--transition);
             font-size: 1rem;
         }
-
         .footer-links a:hover {
             opacity: 1;
             color: var(--accent);
         }
-
         .trust-badge {
             display: inline-block;
             background: rgba(255, 215, 0, 0.15);
@@ -844,7 +1003,7 @@
             border: 1px solid var(--accent);
         }
 
-        /* ===== BACK TO TOP ===== */
+        /* Back to Top */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -866,128 +1025,31 @@
             z-index: 99;
             border: 2px solid transparent;
         }
-
         .back-to-top.show {
             opacity: 1;
             visibility: visible;
         }
-
         .back-to-top:hover {
             background: var(--accent-hover);
             transform: translateY(-5px);
             box-shadow: 0 20px 30px -5px rgba(255, 215, 0, 0.5);
             border-color: white;
         }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .back-to-top.red {
+            background: #ff4d4d;
+            color: white;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== RESPONSIVE DESIGN ===== */
+        /* Responsive */
         @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: var(--primary);
-                flex-direction: column;
-                padding: 25px;
-                gap: 20px;
-                text-align: center;
-                box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.3);
-                border-bottom: 3px solid var(--accent);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a::after {
-                display: none;
-            }
-
-            .header-controls {
-                gap: 12px;
-            }
-
-            .clock {
-                font-size: 0.8rem;
-                padding: 6px 12px;
-            }
-
-            section {
-                padding: 70px 20px;
-            }
-
-            .about-details {
-                grid-template-columns: 1fr;
-                padding: 30px;
-            }
-
-            .about-images {
-                grid-template-columns: 1fr;
-            }
-
-            .email-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .email-item {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: 90px 20px;
-            }
-
-            .hero-btn {
-                padding: 14px 30px;
-                font-size: 1rem;
-            }
-
-            .back-to-top {
-                bottom: 20px;
-                right: 20px;
-                padding: 12px 18px;
-                font-size: 0.9rem;
-            }
-
-            .testimonials {
-                padding: 40px 20px;
-            }
-
-            .music-showcase {
-                padding: 40px 20px;
-            }
+            .hamburger { display: block; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary); flex-direction: column; padding: 25px; gap: 20px; text-align: center; box-shadow: 0 15px 25px -5px rgba(0,0,0,0.3); border-bottom: 3px solid var(--accent); }
+            .nav-links.active { display: flex; }
+            .nav-links a::after { display: none; }
+            .header-controls { gap: 12px; }
+            .clock { font-size: 0.8rem; padding: 6px 12px; }
+            .contact-container { grid-template-columns: 1fr; }
+            .showcase-content { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -999,10 +1061,11 @@
     </div>
 
     <!-- Header -->
-    <header>
+    <header id="mainHeader">
         <div class="header-container">
             <a href="#home" class="logo-link">
-                <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir Logo" class="header-logo" loading="lazy">
+                <!-- Logo putih untuk dark background header, tapi kita bisa ganti via js kalau mode terang/gelap berubah; sederhananya pakai putih saja agar kontras -->
+                <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir Logo" class="header-logo" loading="lazy" id="headerLogo">
             </a>
 
             <nav>
@@ -1018,6 +1081,7 @@
             </nav>
 
             <div class="header-controls">
+                <button class="game-toggle" id="gameToggle" aria-label="Buka Game"><i class="fas fa-dice"></i></button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -1037,7 +1101,7 @@
         </section>
 
         <!-- About Section -->
-        <section class="about reveal" id="about">
+        <section class="about" id="about" data-aos="fade-up">
             <div class="container">
                 <h2 class="section-title">Tentang Saya</h2>
                 <div class="about-content">
@@ -1048,7 +1112,7 @@
                     <div class="about-details">
                         <div class="detail-item">
                             <span class="detail-label">Tempat Lahir</span>
-                            <span class="detail-value">Bogor, Indonesia</span>
+                            <span class="detail-value clickable-location" id="birthplace" data-href="https://maps.app.goo.gl/ud2aDdaUL7tDoXYXA">Bogor, Indonesia</span>
                         </div>
                         <div class="detail-item">
                             <span class="detail-label">Tinggi / Berat</span>
@@ -1063,31 +1127,19 @@
                     <div class="about-images">
                         <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank')">
                             <img src="https://i.postimg.cc/vBsDNgKc/IMG-20250216-091226.png" alt="Muhaajir creative portrait" loading="lazy">
-                            <div class="image-overlay">
-                                <h4>Kreativitas Visual</h4>
-                                <p><i class="fas fa-play"></i> Buka Gallery</p>
-                            </div>
+                            <div class="image-overlay"><h4>Kreativitas Visual</h4><p><i class="fas fa-play"></i> Buka Gallery</p></div>
                         </div>
                         <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank')">
                             <img src="https://i.postimg.cc/50BQ4qzw/20250408-145830-0000.png" alt="Muhaajir music session" loading="lazy">
-                            <div class="image-overlay">
-                                <h4>Music Session</h4>
-                                <p><i class="fas fa-play"></i> Buka Player</p>
-                            </div>
+                            <div class="image-overlay"><h4>Music Session</h4><p><i class="fas fa-play"></i> Buka Player</p></div>
                         </div>
                         <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank')">
-                            <img src="https://i.postimg.cc/wj1tydJL/IMG-20251225-161503.jpg" alt="Resonansi Dalam Diam album" loading="lazy">
-                            <div class="image-overlay">
-                                <h4>Resonansi Dalam Diam</h4>
-                                <p><i class="fas fa-play"></i> Putar Album</p>
-                            </div>
+                            <img src="https://i.postimg.cc/wj1tydJL/IMG-20251225-161503.jpg" alt="Resonansi Dalam Diam" loading="lazy">
+                            <div class="image-overlay"><h4>Resonansi Dalam Diam</h4><p><i class="fas fa-play"></i> Putar Album</p></div>
                         </div>
                         <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank')">
-                            <img src="https://i.postimg.cc/QdTLpvCk/IMG-20251225-153959.jpg" alt="Fragmen Suara album" loading="lazy">
-                            <div class="image-overlay">
-                                <h4>Fragmen Suara</h4>
-                                <p><i class="fas fa-play"></i> Putar Album</p>
-                            </div>
+                            <img src="https://i.postimg.cc/QdTLpvCk/IMG-20251225-153959.jpg" alt="Fragmen Suara" loading="lazy">
+                            <div class="image-overlay"><h4>Fragmen Suara</h4><p><i class="fas fa-play"></i> Putar Album</p></div>
                         </div>
                     </div>
                 </div>
@@ -1095,20 +1147,14 @@
         </section>
 
         <!-- Music Player Showcase -->
-        <div class="container reveal">
+        <div class="container" data-aos="fade-up">
             <div class="music-showcase">
                 <div class="showcase-content">
                     <div class="showcase-text">
                         <h3>Listen to Music</h3>
                         <p>Jelajahi karya musik saya melalui player eksklusif. Dari Resonansi Dalam Diam hingga Fragmen Suara.</p>
-                        
-                        <div>
-                            <span class="license-badge"><i class="fas fa-balance-scale"></i> MIT License</span>
-                        </div>
-                        
-                        <a href="https://hajirmuhaajir.github.io/muhaajirmusicplayers/" class="showcase-btn" target="_blank" rel="noopener">
-                            <i class="fas fa-play"></i> Buka Music Player
-                        </a>
+                        <div><span class="license-badge"><i class="fas fa-balance-scale"></i> MIT License</span></div>
+                        <a href="https://hajirmuhaajir.github.io/muhaajirmusicplayers/" class="showcase-btn" target="_blank" rel="noopener"><i class="fas fa-play"></i> Buka Music Player</a>
                     </div>
                     <div class="showcase-image">
                         <a href="https://hajirmuhaajir.github.io/muhaajirmusicplayers/" target="_blank" rel="noopener">
@@ -1120,72 +1166,62 @@
         </div>
 
         <!-- Testimonials / Quotes Section -->
-        <section class="testimonials reveal container">
+        <section class="testimonials container" id="quotes" data-aos="fade-up">
             <h2 class="section-title">Kutipan Inspiratif</h2>
             <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p>"You don't take a photograph, you make it."</p>
-                    <p class="testimonial-author">— Ansel Adams</p>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Music is the universal language of mankind."</p>
-                    <p class="testimonial-author">— Henry Wadsworth</p>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Design is not just how it looks, but how it works."</p>
-                    <p class="testimonial-author">— Steve Jobs</p>
-                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100"><p>"You don't take a photograph, you make it."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Ansel_Adams" target="_blank">— Ansel Adams</a></p></div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200"><p>"Music is the universal language of mankind."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Henry_Wadsworth_Longfellow" target="_blank">— Henry Wadsworth Longfellow</a></p></div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300"><p>"Design is not just how it looks, but how it works."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Steve_Jobs" target="_blank">— Steve Jobs</a></p></div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400"><p>"Evolution is often the key once the spark of a good direction has been set."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Adrian_Newey" target="_blank">— Adrian Newey</a></p></div>
             </div>
         </section>
 
         <!-- Social Links Section -->
-        <section class="social-links reveal" id="social">
+        <section class="social-links" id="social" data-aos="fade-up">
             <div class="container">
                 <h2 class="section-title">Terhubung Dengan Saya</h2>
                 <div class="social-grid">
-                    <div class="social-card">
-                        <i class="fab fa-youtube"></i>
-                        <a href="https://www.youtube.com/@hajirstein" target="_blank" rel="noopener">YouTube</a>
-                    </div>
-                    <div class="social-card">
-                        <i class="fab fa-tiktok"></i>
-                        <a href="https://www.tiktok.com/@muhaajir_muhaajir" target="_blank" rel="noopener">TikTok</a>
-                    </div>
-                    <div class="social-card">
-                        <i class="fab fa-instagram"></i>
-                        <a href="https://www.instagram.com/muhaajirere" target="_blank" rel="noopener">Instagram</a>
-                    </div>
-                    <div class="social-card">
-                        <i class="fab fa-soundcloud"></i>
-                        <a href="https://on.soundcloud.com/m65TNUx3XarndC67jO" target="_blank" rel="noopener">SoundCloud</a>
-                    </div>
-                    <div class="social-card">
-                        <i class="fab fa-github"></i>
-                        <a href="https://github.com/hajirmuhaajir" target="_blank" rel="noopener">GitHub</a>
-                    </div>
+                    <div class="social-card"><i class="fab fa-youtube"></i><a href="https://www.youtube.com/@hajirstein" target="_blank" rel="noopener">YouTube</a></div>
+                    <div class="social-card"><i class="fab fa-tiktok"></i><a href="https://www.tiktok.com/@muhaajir_muhaajir" target="_blank" rel="noopener">TikTok</a></div>
+                    <div class="social-card"><i class="fab fa-instagram"></i><a href="https://www.instagram.com/muhaajirere" target="_blank" rel="noopener">Instagram</a></div>
+                    <div class="social-card"><i class="fab fa-soundcloud"></i><a href="https://on.soundcloud.com/m65TNUx3XarndC67jO" target="_blank" rel="noopener">SoundCloud</a></div>
+                    <div class="social-card"><i class="fab fa-github"></i><a href="https://github.com/hajirmuhaajir" target="_blank" rel="noopener">GitHub</a></div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section class="contact reveal" id="contact">
+        <!-- Contact Section with Form & Email Info -->
+        <section class="contact" id="contact" data-aos="fade-up">
             <div class="container">
                 <h2 class="section-title">Kirim Pesan</h2>
-                
-                <div class="contact-info">
-                    <div class="email-grid">
-                        <div class="email-item" data-email="muhaajirmuhaajir9@hotmail.com">
-                            <i class="fas fa-envelope"></i>
-                            <span>Hotmail</span>
+                <div class="contact-container">
+                    <!-- Form -->
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Pesan</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Kirim <i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                    <!-- Email Info (Hotmail, Gmail, ProtonMail) -->
+                    <div class="contact-email-info">
+                        <h3 style="color: var(--accent); margin-bottom: 20px;">Kontak Email</h3>
+                        <div class="email-grid">
+                            <div class="email-item" data-email="muhaajirmuhaajir9@hotmail.com"><i class="fas fa-envelope"></i><span>Hotmail</span></div>
+                            <div class="email-item" data-email="muhaajirmuhaajir9@gmail.com"><i class="fas fa-envelope"></i><span>Gmail</span></div>
+                            <div class="email-item" data-email="muhaajirmuhaajir9@proton.me"><i class="fas fa-envelope"></i><span>ProtonMail</span></div>
                         </div>
-                        <div class="email-item" data-email="muhaajirmuhaajir9@gmail.com">
-                            <i class="fas fa-envelope"></i>
-                            <span>Gmail</span>
-                        </div>
-                        <div class="email-item" data-email="muhaajirmuhaajir9@proton.me">
-                            <i class="fas fa-envelope"></i>
-                            <span>Proton Mail</span>
-                        </div>
+                        <p style="margin-top: 20px; opacity:0.8;">Klik untuk menyalin alamat email.</p>
                     </div>
                 </div>
             </div>
@@ -1195,33 +1231,213 @@
     <!-- Footer -->
     <footer>
         <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir Logo" class="footer-logo" loading="lazy">
-        
         <p>© 2026 Muhaajir. All rights reserved.</p>
-        
         <div class="footer-social">
-            <a href="https://www.youtube.com/@hajirstein" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.tiktok.com/@muhaajir_muhaajir" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="https://www.instagram.com/muhaajirere" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://github.com/hajirmuhaajir" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.youtube.com/@hajirstein" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@muhaajir_muhaajir" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/muhaajirere" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/hajirmuhaajir" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
         </div>
-
         <div class="footer-links">
-            <a href="https://hajirmuhaajir.github.io/footer-essentials/" target="_blank">Kebijakan Privasi</a>
-            <a href="https://hajirmuhaajir.github.io/footer-essentials/" target="_blank">Syarat & Ketentuan</a>
-            <a href="https://hajirmuhaajir.github.io/footer-essentials/" target="_blank">Sitemap</a>
+            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank">Kebijakan Privasi</a>
+            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank">Syarat & Ketentuan</a>
+            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank">Sitemap</a>
         </div>
-
         <span class="trust-badge"><i class="fas fa-lock"></i> Koneksi Aman HTTPS</span>
     </footer>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas">
-        <i class="fas fa-arrow-up"></i> Atas
-    </button>
+    <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i> Atas</button>
 
     <!-- Toast Message -->
     <div class="toast-message" id="toastMessage">Email disalin ke clipboard!</div>
 
+    <!-- Modal Game (Tebak Angka) -->
+    <div class="modal-overlay" id="gameModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+            <div class="game-area">
+                <h3><i class="fas fa-dice"></i> Tebak Angka</h3>
+                <p>Tebak angka antara 1 - 100</p>
+                <input type="number" id="guessInput" min="1" max="100" placeholder="Masukkan angka">
+                <div class="game-buttons">
+                    <button id="newGameBtn">Main Lagi</button>
+                    <button id="guessBtn">Tebak</button>
+                </div>
+                <div class="game-feedback" id="gameFeedback"></div>
+                <div class="attempts" id="attemptCount">Percobaan: 0</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AOS & Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        (function() {
+            // AOS init
+            AOS.init({ duration: 1000, once: true });
+
+            // Login screen
+            setTimeout(() => {
+                document.getElementById('loginScreen')?.classList.add('hidden');
+            }, 2000);
+
+            // Clock
+            function updateClock() {
+                const clock = document.getElementById('clock');
+                if (clock) clock.textContent = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false });
+            }
+            setInterval(updateClock, 1000); updateClock();
+
+            // Hamburger
+            const hamburger = document.getElementById('hamburgerBtn');
+            const navLinks = document.getElementById('navLinks');
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    hamburger.querySelector('i').classList.toggle('fa-bars');
+                    hamburger.querySelector('i').classList.toggle('fa-times');
+                });
+                navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.querySelector('i').classList.add('fa-bars');
+                    hamburger.querySelector('i').classList.remove('fa-times');
+                }));
+            }
+
+            // Dark mode
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+
+            // Copy email
+            const emailItems = document.querySelectorAll('.email-item');
+            const toast = document.getElementById('toastMessage');
+            emailItems.forEach(item => {
+                item.addEventListener('click', async () => {
+                    await navigator.clipboard.writeText(item.dataset.email);
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2000);
+                });
+            });
+
+            // Back to top + red effect
+            const backTop = document.getElementById('backToTop');
+            const header = document.getElementById('mainHeader');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) backTop.classList.add('show'); else backTop.classList.remove('show');
+                // red effect when near top
+                if (window.scrollY < 100) header.classList.add('at-top'); else header.classList.remove('at-top');
+            });
+            backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // Active nav
+            const sections = document.querySelectorAll('section[id]');
+            const navItems = document.querySelectorAll('.nav-links a');
+            function setActive() {
+                let scrollY = window.scrollY;
+                sections.forEach(s => {
+                    const top = s.offsetTop - 150, bottom = top + s.offsetHeight, id = s.getAttribute('id');
+                    if (scrollY >= top && scrollY < bottom) {
+                        navItems.forEach(a => {
+                            a.classList.remove('active');
+                            if (a.getAttribute('href') === `#${id}`) a.classList.add('active');
+                        });
+                    }
+                });
+            }
+            window.addEventListener('scroll', setActive); setActive();
+
+            // Clickable birthplace
+            document.getElementById('birthplace').addEventListener('click', function() {
+                window.open(this.dataset.href, '_blank');
+            });
+
+            // Contact form (Formspree via fetch)
+            const form = document.getElementById('contactForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const data = new FormData(form);
+                const res = await fetch('https://formspree.io/f/xgvkobyl', {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (res.ok) {
+                    toast.textContent = 'Pesan terkirim! Terima kasih.';
+                    toast.classList.add('show');
+                    form.reset();
+                    setTimeout(() => toast.classList.remove('show'), 3000);
+                } else {
+                    toast.textContent = 'Gagal mengirim. Coba lagi.';
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 3000);
+                }
+            });
+
+            // Mini Game Modal
+            const gameToggle = document.getElementById('gameToggle');
+            const modal = document.getElementById('gameModal');
+            const closeModal = document.getElementById('closeModal');
+            gameToggle.addEventListener('click', () => modal.classList.add('active'));
+            closeModal.addEventListener('click', () => modal.classList.remove('active'));
+            window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+
+            // Game logic
+            let secretNumber = Math.floor(Math.random() * 100) + 1;
+            let attempts = 0;
+            const guessInput = document.getElementById('guessInput');
+            const guessBtn = document.getElementById('guessBtn');
+            const newGameBtn = document.getElementById('newGameBtn');
+            const gameFeedback = document.getElementById('gameFeedback');
+            const attemptSpan = document.getElementById('attemptCount');
+
+            function updateGame(feedback) {
+                gameFeedback.textContent = feedback;
+                attemptSpan.textContent = `Percobaan: ${attempts}`;
+            }
+
+            guessBtn.addEventListener('click', () => {
+                const guess = parseInt(guessInput.value);
+                if (isNaN(guess) || guess < 1 || guess > 100) {
+                    alert('Masukkan angka 1-100');
+                    return;
+                }
+                attempts++;
+                if (guess === secretNumber) {
+                    updateGame(`🎉 Benar! Angkanya ${secretNumber}.`);
+                    guessBtn.disabled = true;
+                } else if (guess < secretNumber) {
+                    updateGame('🔻 Terlalu kecil');
+                } else {
+                    updateGame('🔺 Terlalu besar');
+                }
+                guessInput.value = '';
+            });
+
+            newGameBtn.addEventListener('click', () => {
+                secretNumber = Math.floor(Math.random() * 100) + 1;
+                attempts = 0;
+                guessBtn.disabled = false;
+                updateGame('Mulai menebak...');
+                guessInput.value = '';
+            });
+            updateGame('Mulai menebak...');
+        })();
+    </script>
     <!-- Schema Markup -->
     <script type="application/ld+json">
     {
@@ -1229,182 +1445,11 @@
         "@type": "Person",
         "name": "Muhaajir",
         "url": "https://hajirmuhaajir.github.io",
-        "sameAs": [
-            "https://www.youtube.com/@hajirstein",
-            "https://www.tiktok.com/@muhaajir_muhaajir",
-            "https://www.instagram.com/muhaajirere",
-            "https://github.com/hajirmuhaajir"
-        ],
+        "sameAs": ["https://www.youtube.com/@hajirstein","https://www.tiktok.com/@muhaajir_muhaajir","https://www.instagram.com/muhaajirere","https://github.com/hajirmuhaajir"],
         "email": "muhaajirmuhaajir9@hotmail.com",
         "description": "Fotografer dan musisi dari Bogor, Indonesia.",
-        "birthPlace": {
-            "@type": "Place",
-            "name": "Bogor, Indonesia"
-        }
+        "birthPlace": { "@type": "Place", "name": "Bogor, Indonesia" }
     }
-    </script>
-
-    <script>
-        (function() {
-            // ===== LOGIN SCREEN =====
-            setTimeout(() => {
-                const loginScreen = document.getElementById('loginScreen');
-                if (loginScreen) {
-                    loginScreen.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                }
-            }, 2000);
-
-            // ===== CLOCK =====
-            function updateClock() {
-                const clock = document.getElementById('clock');
-                if (clock) {
-                    const now = new Date();
-                    clock.textContent = now.toLocaleTimeString('id-ID', { 
-                        hour: '2-digit', 
-                        minute: '2-digit',
-                        hour12: false 
-                    });
-                }
-            }
-            setInterval(updateClock, 1000);
-            updateClock();
-
-            // ===== HAMBURGER MENU =====
-            const hamburger = document.getElementById('hamburgerBtn');
-            const navLinks = document.getElementById('navLinks');
-            
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                    
-                    const icon = hamburger.querySelector('i');
-                    if (navLinks.classList.contains('active')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                });
-
-                navLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navLinks.classList.remove('active');
-                        const icon = hamburger.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    });
-                });
-            }
-
-            // ===== DARK MODE =====
-            const themeToggle = document.getElementById('themeToggle');
-            const themeIcon = themeToggle.querySelector('i');
-            
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                document.body.classList.add('dark-mode');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            }
-
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                
-                if (document.body.classList.contains('dark-mode')) {
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                    localStorage.setItem('darkMode', 'enabled');
-                } else {
-                    themeIcon.classList.remove('fa-sun');
-                    themeIcon.classList.add('fa-moon');
-                    localStorage.setItem('darkMode', 'disabled');
-                }
-            });
-
-            // ===== COPY EMAIL =====
-            const emailItems = document.querySelectorAll('.email-item');
-            const toast = document.getElementById('toastMessage');
-            
-            emailItems.forEach(item => {
-                item.addEventListener('click', async (e) => {
-                    const email = item.dataset.email;
-                    
-                    try {
-                        await navigator.clipboard.writeText(email);
-                        
-                        toast.classList.add('show');
-                        setTimeout(() => {
-                            toast.classList.remove('show');
-                        }, 2000);
-                    } catch (err) {
-                        prompt('Salin email ini:', email);
-                    }
-                });
-            });
-
-            // ===== BACK TO TOP =====
-            const backToTop = document.getElementById('backToTop');
-            
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 400) {
-                    backToTop.classList.add('show');
-                } else {
-                    backToTop.classList.remove('show');
-                }
-            });
-
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // ===== SCROLL REVEAL =====
-            const revealElements = document.querySelectorAll('.reveal');
-            
-            function checkReveal() {
-                revealElements.forEach(element => {
-                    const windowHeight = window.innerHeight;
-                    const elementTop = element.getBoundingClientRect().top;
-                    const revealPoint = 100;
-                    
-                    if (elementTop < windowHeight - revealPoint) {
-                        element.classList.add('active');
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', checkReveal);
-            window.addEventListener('load', checkReveal);
-
-            // ===== ACTIVE NAVIGATION =====
-            const sections = document.querySelectorAll('section[id]');
-            const navItems = document.querySelectorAll('.nav-links a');
-            
-            function setActiveNav() {
-                const scrollY = window.scrollY;
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 150;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-                    const sectionId = section.getAttribute('id');
-                    
-                    if (scrollY >= sectionTop && scrollY < sectionBottom) {
-                        navItems.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${sectionId}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', setActiveNav);
-            window.addEventListener('load', setActiveNav);
-        })();
     </script>
 </body>
 </html>
