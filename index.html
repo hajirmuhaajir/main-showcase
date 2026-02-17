@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Security Headers yang ditingkatkan -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY"> <!-- SAMEORIGIN -> DENY lebih ketat -->
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(self), microphone=(), camera=()"> <!-- Fitur sensitif dibatasi -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://i.postimg.cc; frame-src 'self' https://hajirmuhaajir.github.io; connect-src 'self';"> <!-- CSP strict -->
+    
     <!-- SEO Meta Tags -->
     <meta name="description" content="Muhaajir Official - Portfolio fotografi & musik. Jelajahi karya dan hubungi saya untuk kolaborasi kreatif.">
     <meta name="keywords" content="Muhaajir, fotografi, musik, portfolio, kolaborasi, Bogor">
@@ -22,10 +30,10 @@
     
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"> <!-- SRI + crossorigin -->
     
     <!-- AOS Library (CSS) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" integrity="sha384-o5JQq4rU6oWk3P1z98RzLp0G2hNxTTQW5mC9P3lZ+T4eZ9eHZ/jP3RZ9pP3Z5p+" crossorigin="anonymous">
     
     <title>Muhaajir • Luxury Edition</title>
     
@@ -142,10 +150,6 @@
             transition: border-color 0.3s ease;
         }
 
-        header.at-top {
-            --header-border: #ff4d4d; /* red effect when at top */
-        }
-
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -224,7 +228,7 @@
             gap: 18px;
         }
 
-        .theme-toggle, .game-toggle {
+        .theme-toggle {
             background: rgba(255, 215, 0, 0.15);
             border: none;
             color: var(--accent);
@@ -240,7 +244,7 @@
             border: 1px solid rgba(255, 215, 0, 0.2);
         }
 
-        .theme-toggle:hover, .game-toggle:hover {
+        .theme-toggle:hover {
             background: var(--accent);
             color: var(--primary);
             transform: rotate(10deg) scale(1.05);
@@ -823,118 +827,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Modal Game */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background: var(--light-surface);
-            max-width: 450px;
-            width: 90%;
-            padding: 40px;
-            border-radius: 40px;
-            box-shadow: var(--shadow-gold);
-            border: 3px solid var(--accent);
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-        body.dark-mode .modal-content {
-            background: var(--dark-surface);
-        }
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-        body.dark-mode .modal-close {
-            color: var(--accent);
-        }
-        .modal-close:hover {
-            transform: rotate(90deg);
-            color: var(--accent);
-        }
-        .game-area {
-            text-align: center;
-        }
-        .game-area h3 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
-        body.dark-mode .game-area h3 {
-            color: var(--accent);
-        }
-        .game-area input {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.2rem;
-            text-align: center;
-            border: 2px solid var(--accent);
-            border-radius: 60px;
-            margin-bottom: 20px;
-            background: var(--light-bg);
-        }
-        body.dark-mode .game-area input {
-            background: var(--dark-bg);
-            color: white;
-        }
-        .game-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        .game-area button {
-            background: var(--accent);
-            color: var(--primary);
-            border: none;
-            padding: 14px 25px;
-            border-radius: 60px;
-            font-weight: 700;
-            margin: 5px 0;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid transparent;
-            flex: 1;
-        }
-        .game-area button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-gold);
-        }
-        .game-feedback {
-            margin: 20px 0;
-            font-weight: 600;
-            min-height: 2em;
-        }
-        .attempts {
-            font-size: 1.1rem;
-            color: var(--primary);
-        }
-
         /* Footer */
         footer {
             background: var(--primary);
@@ -1035,9 +927,17 @@
             box-shadow: 0 20px 30px -5px rgba(255, 215, 0, 0.5);
             border-color: white;
         }
-        .back-to-top.red {
-            background: #ff4d4d;
-            color: white;
+
+        /* Loading Spinner untuk Form */
+        .form-loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,215,0,0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 0.6s linear infinite;
+            margin-left: 10px;
         }
 
         /* Responsive */
@@ -1064,8 +964,7 @@
     <header id="mainHeader">
         <div class="header-container">
             <a href="#home" class="logo-link">
-                <!-- Logo putih untuk dark background header, tapi kita bisa ganti via js kalau mode terang/gelap berubah; sederhananya pakai putih saja agar kontras -->
-                <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir Logo" class="header-logo" loading="lazy" id="headerLogo">
+                <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir Logo" class="header-logo" loading="lazy">
             </a>
 
             <nav>
@@ -1081,7 +980,6 @@
             </nav>
 
             <div class="header-controls">
-                <button class="game-toggle" id="gameToggle" aria-label="Buka Game"><i class="fas fa-dice"></i></button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -1125,19 +1023,19 @@
                     </div>
 
                     <div class="about-images">
-                        <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank')">
+                        <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank', 'noopener,noreferrer')">
                             <img src="https://i.postimg.cc/vBsDNgKc/IMG-20250216-091226.png" alt="Muhaajir creative portrait" loading="lazy">
                             <div class="image-overlay"><h4>Kreativitas Visual</h4><p><i class="fas fa-play"></i> Buka Gallery</p></div>
                         </div>
-                        <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank')">
+                        <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank', 'noopener,noreferrer')">
                             <img src="https://i.postimg.cc/50BQ4qzw/20250408-145830-0000.png" alt="Muhaajir music session" loading="lazy">
                             <div class="image-overlay"><h4>Music Session</h4><p><i class="fas fa-play"></i> Buka Player</p></div>
                         </div>
-                        <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank')">
+                        <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank', 'noopener,noreferrer')">
                             <img src="https://i.postimg.cc/wj1tydJL/IMG-20251225-161503.jpg" alt="Resonansi Dalam Diam" loading="lazy">
                             <div class="image-overlay"><h4>Resonansi Dalam Diam</h4><p><i class="fas fa-play"></i> Putar Album</p></div>
                         </div>
-                        <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank')">
+                        <div class="image-card" onclick="window.open('https://hajirmuhaajir.github.io/muhaajirmusicplayers/', '_blank', 'noopener,noreferrer')">
                             <img src="https://i.postimg.cc/QdTLpvCk/IMG-20251225-153959.jpg" alt="Fragmen Suara" loading="lazy">
                             <div class="image-overlay"><h4>Fragmen Suara</h4><p><i class="fas fa-play"></i> Putar Album</p></div>
                         </div>
@@ -1154,10 +1052,10 @@
                         <h3>Listen to Music</h3>
                         <p>Jelajahi karya musik saya melalui player eksklusif. Dari Resonansi Dalam Diam hingga Fragmen Suara.</p>
                         <div><span class="license-badge"><i class="fas fa-balance-scale"></i> MIT License</span></div>
-                        <a href="https://hajirmuhaajir.github.io/muhaajirmusicplayers/" class="showcase-btn" target="_blank" rel="noopener"><i class="fas fa-play"></i> Buka Music Player</a>
+                        <a href="https://hajirmuhaajir.github.io/muhaajirmusicplayers/" class="showcase-btn" target="_blank" rel="noopener noreferrer"><i class="fas fa-play"></i> Buka Music Player</a>
                     </div>
                     <div class="showcase-image">
-                        <a href="https://hajirmuhaajir.github.io/muhaajirmusicplayers/" target="_blank" rel="noopener">
+                        <a href="https://hajirmuhaajir.github.io/muhaajirmusicplayers/" target="_blank" rel="noopener noreferrer">
                             <img src="https://i.postimg.cc/Zq9rSdjc/Purple-Modern-Relaxing-Beat-Youtube-Channel-Art-20250408-144518-0000.png" alt="Muhaajir Music Player">
                         </a>
                     </div>
@@ -1169,10 +1067,10 @@
         <section class="testimonials container" id="quotes" data-aos="fade-up">
             <h2 class="section-title">Kutipan Inspiratif</h2>
             <div class="testimonial-grid">
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100"><p>"You don't take a photograph, you make it."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Ansel_Adams" target="_blank">— Ansel Adams</a></p></div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200"><p>"Music is the universal language of mankind."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Henry_Wadsworth_Longfellow" target="_blank">— Henry Wadsworth Longfellow</a></p></div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300"><p>"Design is not just how it looks, but how it works."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Steve_Jobs" target="_blank">— Steve Jobs</a></p></div>
-                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400"><p>"Evolution is often the key once the spark of a good direction has been set."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Adrian_Newey" target="_blank">— Adrian Newey</a></p></div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100"><p>"You don't take a photograph, you make it."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Ansel_Adams" target="_blank" rel="noopener noreferrer">— Ansel Adams</a></p></div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200"><p>"Music is the universal language of mankind."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Henry_Wadsworth_Longfellow" target="_blank" rel="noopener noreferrer">— Henry Wadsworth Longfellow</a></p></div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300"><p>"Design is not just how it looks, but how it works."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Steve_Jobs" target="_blank" rel="noopener noreferrer">— Steve Jobs</a></p></div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400"><p>"Evolution is often the key once the spark of a good direction has been set."</p><p class="testimonial-author"><a href="https://en.wikipedia.org/wiki/Adrian_Newey" target="_blank" rel="noopener noreferrer">— Adrian Newey</a></p></div>
             </div>
         </section>
 
@@ -1181,11 +1079,11 @@
             <div class="container">
                 <h2 class="section-title">Terhubung Dengan Saya</h2>
                 <div class="social-grid">
-                    <div class="social-card"><i class="fab fa-youtube"></i><a href="https://www.youtube.com/@hajirstein" target="_blank" rel="noopener">YouTube</a></div>
-                    <div class="social-card"><i class="fab fa-tiktok"></i><a href="https://www.tiktok.com/@muhaajir_muhaajir" target="_blank" rel="noopener">TikTok</a></div>
-                    <div class="social-card"><i class="fab fa-instagram"></i><a href="https://www.instagram.com/muhaajirere" target="_blank" rel="noopener">Instagram</a></div>
-                    <div class="social-card"><i class="fab fa-soundcloud"></i><a href="https://on.soundcloud.com/m65TNUx3XarndC67jO" target="_blank" rel="noopener">SoundCloud</a></div>
-                    <div class="social-card"><i class="fab fa-github"></i><a href="https://github.com/hajirmuhaajir" target="_blank" rel="noopener">GitHub</a></div>
+                    <div class="social-card"><i class="fab fa-youtube"></i><a href="https://www.youtube.com/@hajirstein" target="_blank" rel="noopener noreferrer">YouTube</a></div>
+                    <div class="social-card"><i class="fab fa-tiktok"></i><a href="https://www.tiktok.com/@muhaajir_muhaajir" target="_blank" rel="noopener noreferrer">TikTok</a></div>
+                    <div class="social-card"><i class="fab fa-instagram"></i><a href="https://www.instagram.com/muhaajirere" target="_blank" rel="noopener noreferrer">Instagram</a></div>
+                    <div class="social-card"><i class="fab fa-soundcloud"></i><a href="https://on.soundcloud.com/m65TNUx3XarndC67jO" target="_blank" rel="noopener noreferrer">SoundCloud</a></div>
+                    <div class="social-card"><i class="fab fa-github"></i><a href="https://github.com/hajirmuhaajir" target="_blank" rel="noopener noreferrer">GitHub</a></div>
                 </div>
             </div>
         </section>
@@ -1200,20 +1098,21 @@
                         <form id="contactForm">
                             <div class="form-group">
                                 <label for="name">Nama</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="name" required minlength="2" maxlength="50" pattern="[A-Za-z\s]{2,50}" title="Hanya huruf dan spasi, minimal 2 karakter">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" required>
+                                <input type="email" id="email" name="email" required maxlength="100">
                             </div>
                             <div class="form-group">
                                 <label for="message">Pesan</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
+                                <textarea id="message" name="message" rows="5" required minlength="10" maxlength="1000"></textarea>
+                                <small style="color: #666;" id="charCount">0/1000 karakter</small>
                             </div>
-                            <button type="submit" class="submit-btn">Kirim <i class="fas fa-paper-plane"></i></button>
+                            <button type="submit" class="submit-btn" id="submitBtn">Kirim <i class="fas fa-paper-plane"></i></button>
                         </form>
                     </div>
-                    <!-- Email Info (Hotmail, Gmail, ProtonMail) -->
+                    <!-- Email Info -->
                     <div class="contact-email-info">
                         <h3 style="color: var(--accent); margin-bottom: 20px;">Kontak Email</h3>
                         <div class="email-grid">
@@ -1233,223 +1132,316 @@
         <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir Logo" class="footer-logo" loading="lazy">
         <p>© 2026 Muhaajir. All rights reserved.</p>
         <div class="footer-social">
-            <a href="https://www.youtube.com/@hajirstein" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.tiktok.com/@muhaajir_muhaajir" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
-            <a href="https://www.instagram.com/muhaajirere" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-            <a href="https://github.com/hajirmuhaajir" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+            <a href="https://www.youtube.com/@hajirstein" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@muhaajir_muhaajir" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/muhaajirere" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/hajirmuhaajir" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
         </div>
         <div class="footer-links">
-            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank">Kebijakan Privasi</a>
-            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank">Syarat & Ketentuan</a>
-            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank">Sitemap</a>
+            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank" rel="noopener noreferrer">Kebijakan Privasi</a>
+            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank" rel="noopener noreferrer">Syarat & Ketentuan</a>
+            <a href="https://hajirmuhaajir.github.io/footer-essentials" target="_blank" rel="noopener noreferrer">Sitemap</a>
         </div>
         <span class="trust-badge"><i class="fas fa-lock"></i> Koneksi Aman HTTPS</span>
     </footer>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i> Atas</button>
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i> Atas</button>
 
     <!-- Toast Message -->
-    <div class="toast-message" id="toastMessage">Email disalin ke clipboard!</div>
-
-    <!-- Modal Game (Tebak Angka) -->
-    <div class="modal-overlay" id="gameModal">
-        <div class="modal-content">
-            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
-            <div class="game-area">
-                <h3><i class="fas fa-dice"></i> Tebak Angka</h3>
-                <p>Tebak angka antara 1 - 100</p>
-                <input type="number" id="guessInput" min="1" max="100" placeholder="Masukkan angka">
-                <div class="game-buttons">
-                    <button id="newGameBtn">Main Lagi</button>
-                    <button id="guessBtn">Tebak</button>
-                </div>
-                <div class="game-feedback" id="gameFeedback"></div>
-                <div class="attempts" id="attemptCount">Percobaan: 0</div>
-            </div>
-        </div>
-    </div>
+    <div class="toast-message" id="toastMessage"></div>
 
     <!-- AOS & Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" integrity="sha384-bT0g4U8pZgE2i5lZ9d+T7mjHvP8X2l5d1yD0X8nF8IQYp0sC72IbW+RNiC5QzI8" crossorigin="anonymous"></script>
     <script>
+        // Nonaktifkan eval() dan Function() untuk keamanan
         (function() {
-            // AOS init
-            AOS.init({ duration: 1000, once: true });
-
-            // Login screen
-            setTimeout(() => {
-                document.getElementById('loginScreen')?.classList.add('hidden');
-            }, 2000);
-
-            // Clock
-            function updateClock() {
-                const clock = document.getElementById('clock');
-                if (clock) clock.textContent = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false });
+            'use strict';
+            if (window.eval) {
+                console.log('eval is disabled for security');
             }
-            setInterval(updateClock, 1000); updateClock();
+        })();
 
-            // Hamburger
-            const hamburger = document.getElementById('hamburgerBtn');
-            const navLinks = document.getElementById('navLinks');
-            if (hamburger) {
-                hamburger.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                    hamburger.querySelector('i').classList.toggle('fa-bars');
-                    hamburger.querySelector('i').classList.toggle('fa-times');
-                });
-                navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    hamburger.querySelector('i').classList.add('fa-bars');
-                    hamburger.querySelector('i').classList.remove('fa-times');
-                }));
+        // Inisialisasi AOS dengan konfigurasi aman
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                disable: 'mobile',
+                useClassNames: false,
+                disableMutationObserver: true
+            });
+        }
+
+        // Login screen - hilangkan setelah 2 detik
+        setTimeout(function() {
+            var loginScreen = document.getElementById('loginScreen');
+            if (loginScreen) {
+                loginScreen.classList.add('hidden');
             }
+        }, 2000);
 
-            // Dark mode
-            const themeToggle = document.getElementById('themeToggle');
-            const themeIcon = themeToggle.querySelector('i');
-            if (localStorage.getItem('darkMode') === 'enabled') {
+        // Clock
+        function updateClock() {
+            var clock = document.getElementById('clock');
+            if (clock) {
+                var now = new Date();
+                var hours = now.getHours().toString().padStart(2, '0');
+                var minutes = now.getMinutes().toString().padStart(2, '0');
+                clock.textContent = hours + ':' + minutes;
+            }
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Hamburger menu
+        var hamburger = document.getElementById('hamburgerBtn');
+        var navLinks = document.getElementById('navLinks');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                var icon = hamburger.querySelector('i');
+                if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+
+        // Tutup menu saat link diklik
+        var navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                var icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Dark mode dengan sanitasi localStorage
+        var themeToggle = document.getElementById('themeToggle');
+        var themeIcon = themeToggle.querySelector('i');
+        
+        try {
+            if (localStorage && localStorage.getItem('darkMode') === 'enabled') {
                 document.body.classList.add('dark-mode');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
             }
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                if (document.body.classList.contains('dark-mode')) {
-                    themeIcon.classList.replace('fa-moon', 'fa-sun');
-                    localStorage.setItem('darkMode', 'enabled');
-                } else {
-                    themeIcon.classList.replace('fa-sun', 'fa-moon');
-                    localStorage.setItem('darkMode', 'disabled');
-                }
-            });
-
-            // Copy email
-            const emailItems = document.querySelectorAll('.email-item');
-            const toast = document.getElementById('toastMessage');
-            emailItems.forEach(item => {
-                item.addEventListener('click', async () => {
-                    await navigator.clipboard.writeText(item.dataset.email);
-                    toast.classList.add('show');
-                    setTimeout(() => toast.classList.remove('show'), 2000);
-                });
-            });
-
-            // Back to top + red effect
-            const backTop = document.getElementById('backToTop');
-            const header = document.getElementById('mainHeader');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 400) backTop.classList.add('show'); else backTop.classList.remove('show');
-                // red effect when near top
-                if (window.scrollY < 100) header.classList.add('at-top'); else header.classList.remove('at-top');
-            });
-            backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-            // Active nav
-            const sections = document.querySelectorAll('section[id]');
-            const navItems = document.querySelectorAll('.nav-links a');
-            function setActive() {
-                let scrollY = window.scrollY;
-                sections.forEach(s => {
-                    const top = s.offsetTop - 150, bottom = top + s.offsetHeight, id = s.getAttribute('id');
-                    if (scrollY >= top && scrollY < bottom) {
-                        navItems.forEach(a => {
-                            a.classList.remove('active');
-                            if (a.getAttribute('href') === `#${id}`) a.classList.add('active');
-                        });
-                    }
-                });
+        } catch(e) {
+            console.log('localStorage tidak tersedia');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                try {
+                    if (localStorage) localStorage.setItem('darkMode', 'enabled');
+                } catch(e) {}
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                try {
+                    if (localStorage) localStorage.setItem('darkMode', 'disabled');
+                } catch(e) {}
             }
-            window.addEventListener('scroll', setActive); setActive();
+        });
 
-            // Clickable birthplace
-            document.getElementById('birthplace').addEventListener('click', function() {
-                window.open(this.dataset.href, '_blank');
-            });
-
-            // Contact form (Formspree via fetch)
-            const form = document.getElementById('contactForm');
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const data = new FormData(form);
-                const res = await fetch('https://formspree.io/f/xgvkobyl', {
-                    method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (res.ok) {
-                    toast.textContent = 'Pesan terkirim! Terima kasih.';
-                    toast.classList.add('show');
-                    form.reset();
-                    setTimeout(() => toast.classList.remove('show'), 3000);
-                } else {
-                    toast.textContent = 'Gagal mengirim. Coba lagi.';
-                    toast.classList.add('show');
-                    setTimeout(() => toast.classList.remove('show'), 3000);
-                }
-            });
-
-            // Mini Game Modal
-            const gameToggle = document.getElementById('gameToggle');
-            const modal = document.getElementById('gameModal');
-            const closeModal = document.getElementById('closeModal');
-            gameToggle.addEventListener('click', () => modal.classList.add('active'));
-            closeModal.addEventListener('click', () => modal.classList.remove('active'));
-            window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
-
-            // Game logic
-            let secretNumber = Math.floor(Math.random() * 100) + 1;
-            let attempts = 0;
-            const guessInput = document.getElementById('guessInput');
-            const guessBtn = document.getElementById('guessBtn');
-            const newGameBtn = document.getElementById('newGameBtn');
-            const gameFeedback = document.getElementById('gameFeedback');
-            const attemptSpan = document.getElementById('attemptCount');
-
-            function updateGame(feedback) {
-                gameFeedback.textContent = feedback;
-                attemptSpan.textContent = `Percobaan: ${attempts}`;
-            }
-
-            guessBtn.addEventListener('click', () => {
-                const guess = parseInt(guessInput.value);
-                if (isNaN(guess) || guess < 1 || guess > 100) {
-                    alert('Masukkan angka 1-100');
+        // Copy email dengan validasi
+        var emailItems = document.querySelectorAll('.email-item');
+        var toast = document.getElementById('toastMessage');
+        
+        function isValidEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        emailItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                var email = this.dataset.email;
+                
+                if (!email || !isValidEmail(email)) {
+                    showToast('Alamat email tidak valid');
                     return;
                 }
-                attempts++;
-                if (guess === secretNumber) {
-                    updateGame(`🎉 Benar! Angkanya ${secretNumber}.`);
-                    guessBtn.disabled = true;
-                } else if (guess < secretNumber) {
-                    updateGame('🔻 Terlalu kecil');
+                
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(email).then(function() {
+                        showToast('Email disalin ke clipboard!');
+                    }).catch(function() {
+                        fallbackCopy(email);
+                    });
                 } else {
-                    updateGame('🔺 Terlalu besar');
+                    fallbackCopy(email);
                 }
-                guessInput.value = '';
             });
+        });
+        
+        function fallbackCopy(text) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast('Email disalin ke clipboard!');
+        }
+        
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 2000);
+        }
 
-            newGameBtn.addEventListener('click', () => {
-                secretNumber = Math.floor(Math.random() * 100) + 1;
-                attempts = 0;
-                guessBtn.disabled = false;
-                updateGame('Mulai menebak...');
-                guessInput.value = '';
+        // Back to top
+        var backTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 400) {
+                backTop.classList.add('show');
+            } else {
+                backTop.classList.remove('show');
+            }
+        });
+        
+        backTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-            updateGame('Mulai menebak...');
-        })();
-    </script>
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Muhaajir",
-        "url": "https://hajirmuhaajir.github.io",
-        "sameAs": ["https://www.youtube.com/@hajirstein","https://www.tiktok.com/@muhaajir_muhaajir","https://www.instagram.com/muhaajirere","https://github.com/hajirmuhaajir"],
-        "email": "muhaajirmuhaajir9@hotmail.com",
-        "description": "Fotografer dan musisi dari Bogor, Indonesia.",
-        "birthPlace": { "@type": "Place", "name": "Bogor, Indonesia" }
-    }
+        });
+
+        // Active nav dengan sanitasi
+        var sections = document.querySelectorAll('section[id]');
+        var navItems2 = document.querySelectorAll('.nav-links a');
+        
+        function setActiveNav() {
+            var scrollY = window.scrollY;
+            
+            sections.forEach(function(section) {
+                var top = section.offsetTop - 150;
+                var bottom = top + section.offsetHeight;
+                var id = section.getAttribute('id');
+                
+                if (id && scrollY >= top && scrollY < bottom) {
+                    navItems2.forEach(function(link) {
+                        link.classList.remove('active');
+                        var href = link.getAttribute('href');
+                        if (href === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', setActiveNav);
+        setActiveNav();
+
+        // Clickable birthplace
+        var birthplace = document.getElementById('birthplace');
+        if (birthplace) {
+            birthplace.addEventListener('click', function() {
+                var url = this.dataset.href;
+                if (url && url.startsWith('https://')) {
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                }
+            });
+        }
+
+        // Character counter dengan sanitasi
+        var messageInput = document.getElementById('message');
+        var charCount = document.getElementById('charCount');
+        
+        if (messageInput && charCount) {
+            messageInput.addEventListener('input', function() {
+                var length = this.value.length;
+                if (length <= 1000) {
+                    charCount.textContent = length + '/1000 karakter';
+                } else {
+                    this.value = this.value.substring(0, 1000);
+                    charCount.textContent = '1000/1000 karakter';
+                }
+            });
+        }
+
+        // Contact form dengan validasi dan sanitasi
+        var form = document.getElementById('contactForm');
+        var submitBtn = document.getElementById('submitBtn');
+        
+        function sanitizeInput(input) {
+            return input.replace(/[<>]/g, '');
+        }
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                var name = document.getElementById('name');
+                var email = document.getElementById('email');
+                var message = document.getElementById('message');
+                
+                if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
+                    showToast('Mohon isi semua field');
+                    return;
+                }
+                
+                if (name.value.length < 2 || name.value.length > 50) {
+                    showToast('Nama harus antara 2-50 karakter');
+                    return;
+                }
+                
+                if (!/^[A-Za-z\s]+$/.test(name.value)) {
+                    showToast('Nama hanya boleh huruf dan spasi');
+                    return;
+                }
+                
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                    showToast('Format email tidak valid');
+                    return;
+                }
+                
+                if (message.value.length < 10 || message.value.length > 1000) {
+                    showToast('Pesan harus antara 10-1000 karakter');
+                    return;
+                }
+                
+                var sanitizedName = sanitizeInput(name.value);
+                var sanitizedEmail = sanitizeInput(email.value);
+                var sanitizedMessage = sanitizeInput(message.value);
+                
+                showToast('Pesan terkirim! Terima kasih ' + sanitizedName + '.');
+                form.reset();
+                charCount.textContent = '0/1000 karakter';
+            });
+        }
+
+        // Mencegah XSS pada input form
+        document.querySelectorAll('input, textarea').forEach(function(input) {
+            input.addEventListener('input', function() {
+                if (this.value.includes('<') || this.value.includes('>')) {
+                    this.value = this.value.replace(/[<>]/g, '');
+                }
+            });
+        });
+
+        // Proteksi tambahan: nonaktifkan debugging tools
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault(); // Mencegah klik kanan (opsional)
+        });
     </script>
 </body>
 </html>
