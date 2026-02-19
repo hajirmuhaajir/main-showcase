@@ -7,10 +7,10 @@
     <!-- Security Headers yang ditingkatkan -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY"> <!-- SAMEORIGIN -> DENY lebih ketat -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="geolocation=(self), microphone=(), camera=()"> <!-- Fitur sensitif dibatasi -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://i.postimg.cc; frame-src 'self' https://hajirmuhaajir.github.io; connect-src 'self';"> <!-- CSP strict -->
+    <meta http-equiv="Permissions-Policy" content="geolocation=(self), microphone=(), camera=()">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://i.postimg.cc; frame-src 'self' https://hajirmuhaajir.github.io; connect-src 'self' https://formspree.io;">
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Muhaajir Official - Portfolio fotografi & musik. Jelajahi karya dan hubungi saya untuk kolaborasi kreatif.">
@@ -30,10 +30,10 @@
     
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"> <!-- SRI + crossorigin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     
     <!-- AOS Library (CSS) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" integrity="sha384-o5JQq4rU6oWk3P1z98RzLp0G2hNxTTQW5mC9P3lZ+T4eZ9eHZ/jP3RZ9pP3Z5p+" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" integrity="sha384-o5JQq4rU6oWk3P1z98RzLp0G2hNxTTQW5mC9P3lZ+T4eZ9eHZ/jP3R9ZPp3Z5p+" crossorigin="anonymous">
     
     <title>Muhaajir • Luxury Edition</title>
     
@@ -951,6 +951,117 @@
             .contact-container { grid-template-columns: 1fr; }
             .showcase-content { grid-template-columns: 1fr; }
         }
+
+        /* ===== DESKTOP OPTIMIZATION (≥1024px) ===== */
+        @media (min-width: 1024px) {
+            /* Container dipastikan tidak melebar */
+            .container {
+                max-width: 1200px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Header: menu horizontal, sembunyikan hamburger */
+            .hamburger {
+                display: none !important;
+            }
+            .nav-links {
+                display: flex !important;
+                gap: 2.5rem;
+                position: static;
+                width: auto;
+                background: transparent;
+                box-shadow: none;
+                border-bottom: none;
+                padding: 0;
+            }
+            .header-container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            /* Hero content dibatasi dan teks lebih besar */
+            .hero-content {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            .hero h1 {
+                font-size: 5rem;
+                letter-spacing: -0.02em;
+            }
+            .hero .tagline {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            /* Ukuran font secara umum */
+            body {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 3.2rem;
+                margin-bottom: 4rem;
+            }
+            .about-text {
+                font-size: 1.3rem;
+                max-width: 900px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Grid dengan jumlah kolom tetap agar lebih terstruktur */
+            .about-images {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+            }
+            .testimonial-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+            }
+            .social-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 2rem;
+            }
+            /* contact-container sudah 2 kolom, pertahankan */
+            .contact-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+
+            /* Perbesar padding section agar lebih lapang */
+            section {
+                padding: 120px 24px;
+            }
+            .music-showcase {
+                padding: 80px 60px;
+            }
+
+            /* Penyesuaian kartu dan elemen lainnya */
+            .about-details {
+                padding: 3rem;
+                gap: 3rem;
+            }
+            .testimonial-card {
+                padding: 2.5rem;
+            }
+            .social-card {
+                padding: 2.5rem 1.5rem;
+            }
+            .contact-form, .contact-email-info {
+                padding: 3rem;
+            }
+
+            /* Footer lebih rapi */
+            .footer-logo {
+                width: 100px;
+                height: 100px;
+            }
+            .footer-social a {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -991,10 +1102,12 @@
     <main>
         <!-- Hero Section -->
         <section class="hero" id="home">
-            <div class="hero-content">
-                <h1>Muhaajir</h1>
-                <p class="tagline">Mengabadikan momen, menciptakan melodi</p>
-                <a href="#social" class="hero-btn">Jelajahi Karya</a>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Muhaajir</h1>
+                    <p class="tagline">Mengabadikan momen, menciptakan melodi</p>
+                    <a href="#social" class="hero-btn">Jelajahi Karya</a>
+                </div>
             </div>
         </section>
 
@@ -1056,7 +1169,7 @@
                     </div>
                     <div class="showcase-image">
                         <a href="https://hajirmuhaajir.github.io/muhaajirmusicplayers/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://i.postimg.cc/Zq9rSdjc/Purple-Modern-Relaxing-Beat-Youtube-Channel-Art-20250408-144518-0000.png" alt="Muhaajir Music Player">
+                            <img src="https://i.postimg.cc/Zq9rSdjc/Purple-Modern-Relaxing-Beat-Youtube-Channel-Art-20250408-144518-0000.png" alt="Muhaajir Music Player" loading="lazy">
                         </a>
                     </div>
                 </div>
@@ -1088,14 +1201,14 @@
             </div>
         </section>
 
-        <!-- Contact Section with Form & Email Info -->
+        <!-- Contact Section dengan Formspree -->
         <section class="contact" id="contact" data-aos="fade-up">
             <div class="container">
                 <h2 class="section-title">Kirim Pesan</h2>
                 <div class="contact-container">
-                    <!-- Form -->
+                    <!-- Form dengan Formspree -->
                     <div class="contact-form">
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formspree.io/f/xgvkobyl" method="POST">
                             <div class="form-group">
                                 <label for="name">Nama</label>
                                 <input type="text" id="name" name="name" required minlength="2" maxlength="50" pattern="[A-Za-z\s]{2,50}" title="Hanya huruf dan spasi, minimal 2 karakter">
@@ -1109,8 +1222,14 @@
                                 <textarea id="message" name="message" rows="5" required minlength="10" maxlength="1000"></textarea>
                                 <small style="color: #666;" id="charCount">0/1000 karakter</small>
                             </div>
+                            <!-- Input hidden untuk redirect (opsional) -->
+                            <input type="hidden" name="_subject" value="Pesan Baru dari Portfolio Muhaajir">
+                            <input type="hidden" name="_gotcha" style="display:none">
                             <button type="submit" class="submit-btn" id="submitBtn">Kirim <i class="fas fa-paper-plane"></i></button>
                         </form>
+                        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">
+                            <i class="fas fa-lock"></i> Pesan akan dikirim melalui Formspree
+                        </p>
                     </div>
                     <!-- Email Info -->
                     <div class="contact-email-info">
@@ -1151,10 +1270,10 @@
     <!-- Toast Message -->
     <div class="toast-message" id="toastMessage"></div>
 
-    <!-- AOS & Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" integrity="sha384-bT0g4U8pZgE2i5lZ9d+T7mjHvP8X2l5d1yD0X8nF8IQYp0sC72IbW+RNiC5QzI8" crossorigin="anonymous"></script>
+    <!-- Scripts dengan defer -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" integrity="sha384-bT0g4U8pZgE2i5lZ9d+T7mjHvP8X2l5d1yD0X8nF8IQYp0sC72IbW+RNiC5QzI8" crossorigin="anonymous" defer></script>
     <script>
-        // Nonaktifkan eval() dan Function() untuk keamanan
+        // Nonaktifkan eval()
         (function() {
             'use strict';
             if (window.eval) {
@@ -1162,7 +1281,7 @@
             }
         })();
 
-        // Inisialisasi AOS dengan konfigurasi aman
+        // Inisialisasi AOS
         if (typeof AOS !== 'undefined') {
             AOS.init({
                 duration: 1000,
@@ -1173,7 +1292,7 @@
             });
         }
 
-        // Login screen - hilangkan setelah 2 detik
+        // Login screen
         setTimeout(function() {
             var loginScreen = document.getElementById('loginScreen');
             if (loginScreen) {
@@ -1223,7 +1342,7 @@
             });
         });
 
-        // Dark mode dengan sanitasi localStorage
+        // Dark mode
         var themeToggle = document.getElementById('themeToggle');
         var themeIcon = themeToggle.querySelector('i');
         
@@ -1255,7 +1374,7 @@
             }
         });
 
-        // Copy email dengan validasi
+        // Copy email
         var emailItems = document.querySelectorAll('.email-item');
         var toast = document.getElementById('toastMessage');
         
@@ -1324,7 +1443,7 @@
             });
         });
 
-        // Active nav dengan sanitasi
+        // Active nav
         var sections = document.querySelectorAll('section[id]');
         var navItems2 = document.querySelectorAll('.nav-links a');
         
@@ -1362,7 +1481,7 @@
             });
         }
 
-        // Character counter dengan sanitasi
+        // Character counter
         var messageInput = document.getElementById('message');
         var charCount = document.getElementById('charCount');
         
@@ -1378,9 +1497,8 @@
             });
         }
 
-        // Contact form dengan validasi dan sanitasi
+        // Form submission dengan Formspree
         var form = document.getElementById('contactForm');
-        var submitBtn = document.getElementById('submitBtn');
         
         function sanitizeInput(input) {
             return input.replace(/[<>]/g, '');
@@ -1388,48 +1506,57 @@
         
         if (form) {
             form.addEventListener('submit', function(e) {
-                e.preventDefault();
+                // Biarkan form submit secara normal ke Formspree
+                // Tapi kita bisa validasi dulu
                 
                 var name = document.getElementById('name');
                 var email = document.getElementById('email');
                 var message = document.getElementById('message');
                 
                 if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
+                    e.preventDefault();
                     showToast('Mohon isi semua field');
                     return;
                 }
                 
                 if (name.value.length < 2 || name.value.length > 50) {
+                    e.preventDefault();
                     showToast('Nama harus antara 2-50 karakter');
                     return;
                 }
                 
                 if (!/^[A-Za-z\s]+$/.test(name.value)) {
+                    e.preventDefault();
                     showToast('Nama hanya boleh huruf dan spasi');
                     return;
                 }
                 
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                    e.preventDefault();
                     showToast('Format email tidak valid');
                     return;
                 }
                 
                 if (message.value.length < 10 || message.value.length > 1000) {
+                    e.preventDefault();
                     showToast('Pesan harus antara 10-1000 karakter');
                     return;
                 }
                 
-                var sanitizedName = sanitizeInput(name.value);
-                var sanitizedEmail = sanitizeInput(email.value);
-                var sanitizedMessage = sanitizeInput(message.value);
+                // Sanitasi input
+                name.value = sanitizeInput(name.value);
+                email.value = sanitizeInput(email.value);
+                message.value = sanitizeInput(message.value);
                 
-                showToast('Pesan terkirim! Terima kasih ' + sanitizedName + '.');
-                form.reset();
-                charCount.textContent = '0/1000 karakter';
+                // Tampilkan notifikasi loading
+                showToast('Mengirim pesan...');
+                
+                // Form akan submit ke Formspree
+                return true;
             });
         }
 
-        // Mencegah XSS pada input form
+        // Proteksi XSS
         document.querySelectorAll('input, textarea').forEach(function(input) {
             input.addEventListener('input', function() {
                 if (this.value.includes('<') || this.value.includes('>')) {
@@ -1438,14 +1565,15 @@
             });
         });
 
-        // Proteksi tambahan: nonaktifkan debugging tools
+        // Proteksi klik kanan (opsional)
         document.addEventListener('contextmenu', function(e) {
-            e.preventDefault(); // Mencegah klik kanan (opsional)
+            e.preventDefault();
         });
     </script>
-<!-- satu logo tambahan kecil di pojok kanan bawah absolute (opsional) biar makin terlihat -->
-<div style="position: fixed; bottom: 10px; right: 10px; opacity:0.2; pointer-events: none;">
-    <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" style="height:20px;" alt="">
-</div>
+
+    <!-- Logo kecil di pojok kanan bawah -->
+    <div style="position: fixed; bottom: 10px; right: 10px; opacity:0.2; pointer-events: none; z-index: 9998;">
+        <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" style="height:20px;" alt="" loading="lazy">
+    </div>
 </body>
 </html>
